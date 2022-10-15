@@ -1,0 +1,47 @@
+type Query {
+    shows(titleFilter: String): [Show!]!
+    show(id: ID!): Show
+}
+
+type Show {
+    id: String!
+    version: Int!
+    title: String!
+    releaseYear: Int!
+}
+
+type Mutation {
+    createShow(input: CreateShowInput!): CreateShowPayload!
+    updateShow(input: UpdateShowInput!): UpdateShowPayload!
+    deleteShow(input: DeleteShowInput!): DeleteShowPayload!
+}
+
+input CreateShowInput {
+    title: String!
+    releaseYear: Int!
+}
+
+type CreateShowPayload {
+    show: Show
+    error: String
+}
+
+input UpdateShowInput {
+    id: ID!
+    version: Int!
+    title: String!
+    releaseYear: Int!
+}
+
+type UpdateShowPayload {
+    show: Show
+    error: String
+}
+
+input DeleteShowInput {
+    id: ID!
+}
+
+type DeleteShowPayload {
+    error: String
+}

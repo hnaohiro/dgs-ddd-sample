@@ -1,0 +1,2 @@
+ALTER TABLE shows
+    ADD COLUMN version INTEGER NOT NULL AFTER id;
