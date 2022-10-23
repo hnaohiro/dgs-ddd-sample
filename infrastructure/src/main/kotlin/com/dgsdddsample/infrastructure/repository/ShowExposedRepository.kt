@@ -3,6 +3,7 @@ package com.dgsdddsample.infrastructure.repository
 import com.dgsdddsample.domain.show.*
 import com.dgsdddsample.infrastructure.table.ShowTable
 import org.jetbrains.exposed.sql.*
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 
 class ShowExposedRepository : ShowRepository {
     override fun findById(id: ShowId): Show? {
