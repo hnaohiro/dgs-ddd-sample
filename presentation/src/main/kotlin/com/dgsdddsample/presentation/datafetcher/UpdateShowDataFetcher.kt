@@ -1,7 +1,5 @@
 package com.dgsdddsample.presentation.datafetcher
 
-import com.dgsdddsample.infrastructure.KULIDGenerator
-import com.dgsdddsample.infrastructure.repository.ShowExposedRepository
 import com.dgsdddsample.presentation.adapter.ShowAdapter
 import com.dgsdddsample.presentation.generated.types.UpdateShowInput
 import com.dgsdddsample.presentation.generated.types.UpdateShowPayload
@@ -10,13 +8,13 @@ import com.netflix.graphql.dgs.DgsComponent
 import com.netflix.graphql.dgs.DgsMutation
 import com.netflix.graphql.dgs.InputArgument
 import org.jetbrains.exposed.sql.transactions.transaction
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
 @DgsComponent
-class UpdateShowDataFetcher {
-    private val showRepository = ShowExposedRepository()
-    private val ulidGenerator = KULIDGenerator()
-    private val updateShowUseCase = UpdateShowUseCase(showRepository, ulidGenerator)
-    private val showAdapter = ShowAdapter()
+class UpdateShowDataFetcher : KoinComponent {
+    private val updateShowUseCase: UpdateShowUseCase by inject()
+    private val showAdapter: ShowAdapter by inject()
 
     @DgsMutation
     fun updateShow(@InputArgument input: UpdateShowInput): UpdateShowPayload {
