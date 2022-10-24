@@ -6,7 +6,6 @@ import com.dgsdddsample.usecase.show.GetShowsUseCase
 import com.netflix.graphql.dgs.DgsComponent
 import com.netflix.graphql.dgs.DgsQuery
 import com.netflix.graphql.dgs.InputArgument
-import org.jetbrains.exposed.sql.transactions.transaction
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
@@ -17,12 +16,12 @@ class ShowsDataFetcher : KoinComponent {
 
     @DgsQuery
     fun shows(@InputArgument titleFilter: String?): List<Show> {
-        val params = GetShowsUseCase.Params(
-            titleFilter = titleFilter,
-        )
-        val dto = transaction {
-            getShowsUseCase.handle(params)
+        return getShowsUseCase.handle(
+            GetShowsUseCase.Params(
+                titleFilter = titleFilter,
+            )
+        ).let { dto ->
+            dto.shows.map { showAdapter.adapt(it) }
         }
-        return dto.shows.map { showAdapter.adapt(it) }
     }
 }

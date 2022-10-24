@@ -7,7 +7,6 @@ import com.dgsdddsample.usecase.show.CreateShowUseCase
 import com.netflix.graphql.dgs.DgsComponent
 import com.netflix.graphql.dgs.DgsMutation
 import com.netflix.graphql.dgs.InputArgument
-import org.jetbrains.exposed.sql.transactions.transaction
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
@@ -18,16 +17,16 @@ class CreateShowDataFetcher : KoinComponent {
 
     @DgsMutation
     fun createShow(@InputArgument input: CreateShowInput): CreateShowPayload {
-        val params = CreateShowUseCase.Params(
-            title = input.title,
-            releaseYear = input.releaseYear,
-        )
-        val dto = transaction {
-            createShowUseCase.handle(params)
+        return createShowUseCase.handle(
+            CreateShowUseCase.Params(
+                title = input.title,
+                releaseYear = input.releaseYear,
+            )
+        ).let { dto ->
+            CreateShowPayload(
+                show = dto.show?.let { showAdapter.adapt(it) },
+                error = dto.error,
+            )
         }
-        return CreateShowPayload(
-            show = dto.show?.let { showAdapter.adapt(it) },
-            error = dto.error,
-        )
     }
 }

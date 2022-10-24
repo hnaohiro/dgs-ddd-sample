@@ -8,6 +8,8 @@ dependencies {
     implementation("org.jetbrains.exposed:exposed-core:0.40.1")
     implementation("org.jetbrains.exposed:exposed-dao:0.40.1")
     implementation("org.jetbrains.exposed:exposed-jdbc:0.40.1")
+    implementation("org.jetbrains.exposed:spring-transaction:0.40.1")
+    implementation("org.jetbrains.exposed:exposed-spring-boot-starter:0.40.1")
     implementation("mysql:mysql-connector-java:8.0.30")
     implementation("org.flywaydb:flyway-core:9.5.1")
     implementation("org.flywaydb:flyway-mysql:9.5.1")
