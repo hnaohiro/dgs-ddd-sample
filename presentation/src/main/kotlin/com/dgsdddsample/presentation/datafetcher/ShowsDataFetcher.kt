@@ -1,7 +1,11 @@
 package com.dgsdddsample.presentation.datafetcher
 
 import com.dgsdddsample.presentation.adapter.ShowAdapter
+import com.dgsdddsample.presentation.adapter.ingress.querycondition.int.adapt
+import com.dgsdddsample.presentation.adapter.ingress.querycondition.string.adapt
+import com.dgsdddsample.presentation.generated.types.IntCondition
 import com.dgsdddsample.presentation.generated.types.Show
+import com.dgsdddsample.presentation.generated.types.StringCondition
 import com.dgsdddsample.usecase.show.GetShowsUseCase
 import com.netflix.graphql.dgs.DgsComponent
 import com.netflix.graphql.dgs.DgsQuery
@@ -15,10 +19,14 @@ class ShowsDataFetcher : KoinComponent {
     private val showAdapter: ShowAdapter by inject()
 
     @DgsQuery
-    fun shows(@InputArgument titleFilter: String?): List<Show> {
+    fun shows(
+        @InputArgument title: StringCondition?,
+        @InputArgument releaseYear: IntCondition?,
+    ): List<Show> {
         return getShowsUseCase.handle(
             GetShowsUseCase.Params(
-                titleFilter = titleFilter,
+                title = title?.adapt(),
+                releaseYear = releaseYear?.adapt(),
             )
         ).let { dto ->
             dto.shows.map { showAdapter.adapt(it) }

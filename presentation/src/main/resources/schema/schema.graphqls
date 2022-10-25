@@ -1,6 +1,30 @@
 type Query {
-    shows(titleFilter: String): [Show!]!
+    shows(
+        title: StringCondition
+        releaseYear: IntCondition
+    ): [Show!]!
     show(id: ID!): Show
+}
+
+input StringCondition {
+    value: String!
+    matchType: MatchType!
+}
+
+enum MatchType {
+    FULL
+    PARTIAL
+}
+
+input IntCondition {
+    value: Int!
+    compareType: CompareType!
+}
+
+enum  CompareType {
+    EQUAL
+    LESS_THAN
+    GREATER_THAN
 }
 
 type Show {

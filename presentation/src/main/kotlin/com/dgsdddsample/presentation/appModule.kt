@@ -3,6 +3,7 @@ package com.dgsdddsample.presentation
 import com.dgsdddsample.domain.shared.ULIDGenerator
 import com.dgsdddsample.domain.show.ShowRepository
 import com.dgsdddsample.infrastructure.KULIDGenerator
+import com.dgsdddsample.infrastructure.queryservice.ShowsExposedQueryService
 import com.dgsdddsample.infrastructure.repository.ShowExposedRepository
 import com.dgsdddsample.infrastructure.transaction.ExposedTransactionManager
 import com.dgsdddsample.presentation.adapter.ShowAdapter
@@ -14,6 +15,7 @@ val appModule = module {
     single<TransactionManager> { ExposedTransactionManager() }
     single<ShowRepository> { ShowExposedRepository() }
     single<ULIDGenerator> { KULIDGenerator() }
+    single<ShowsQueryService> { ShowsExposedQueryService() }
     single { CreateShowUseCase(get(), get(), get()) }
     single { DeleteShowUseCase(get(), get()) }
     single { GetShowsUseCase(get(), get()) }

@@ -1,6 +1,7 @@
 package com.dgsdddsample.infrastructure.repository
 
 import com.dgsdddsample.domain.show.*
+import com.dgsdddsample.infrastructure.adapter.reconstructShow
 import com.dgsdddsample.infrastructure.table.ShowTable
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
@@ -11,25 +12,7 @@ class ShowExposedRepository : ShowRepository {
             .select { ShowTable.id eq id.string() }
             .limit(1)
             .singleOrNull()
-            ?.let { reconstructFromRow(it) }
-    }
-
-    override fun findByTitle(titleFilter: String?): List<Show> {
-        val shows = if (titleFilter != null) {
-            ShowTable.select { ShowTable.title like LikePattern("%${titleFilter}%", '%') }
-        } else {
-            ShowTable.selectAll()
-        }
-        return shows.map { reconstructFromRow(it) }
-    }
-
-    private fun reconstructFromRow(row: ResultRow): Show {
-        return Show.reconstruct(
-            id = row[ShowTable.id],
-            version = row[ShowTable.version],
-            title = row[ShowTable.title],
-            releaseYear = row[ShowTable.releaseYear]
-        )
+            ?.reconstructShow()
     }
 
     override fun save(show: Show): Boolean {
