@@ -1,4 +1,4 @@
-package com.dgsdddsample.presentation
+package com.dgsdddsample.configuration
 
 import com.dgsdddsample.domain.shared.ULIDGenerator
 import com.dgsdddsample.domain.show.ShowRepository

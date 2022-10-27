@@ -6,13 +6,13 @@ plugins {
 }
 
 dependencies {
+    implementation(project(":configuration"))
     implementation(project(":domain"))
-    implementation(project(":infrastructure"))
     implementation(project(":usecase"))
+    implementation("io.insert-koin:koin-core:3.2.2")
     implementation("org.springframework.boot:spring-boot-starter")
     implementation(platform("com.netflix.graphql.dgs:graphql-dgs-platform-dependencies:5.3.0"))
     implementation("com.netflix.graphql.dgs:graphql-dgs-spring-boot-starter")
-    implementation("io.insert-koin:koin-core:3.2.2")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 

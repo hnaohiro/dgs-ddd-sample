@@ -1,4 +1,4 @@
-modules=(domain infrastructure presentation usecase)
+modules=(configuration domain infrastructure presentation usecase)
 
 for v in "${modules[@]}"
 do
