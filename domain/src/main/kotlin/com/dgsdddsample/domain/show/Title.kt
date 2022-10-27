@@ -5,7 +5,5 @@ data class Title(private val value: String) {
         require(value.isNotEmpty())
     }
 
-    fun string(): String {
-        return value
-    }
+    fun string() = value
 }

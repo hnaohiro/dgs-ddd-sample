@@ -16,7 +16,7 @@ class ShowFactory(
         }
 
         return Show(
-            id = ShowId.create(ulidGenerator),
+            id = ShowId(ulidGenerator.generate()),
             version = ShowVersion.init,
             title = title,
             releaseYear = releaseYear,
