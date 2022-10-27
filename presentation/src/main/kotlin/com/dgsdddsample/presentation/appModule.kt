@@ -6,7 +6,6 @@ import com.dgsdddsample.infrastructure.KULIDGenerator
 import com.dgsdddsample.infrastructure.queryservice.ShowsExposedQueryService
 import com.dgsdddsample.infrastructure.repository.ShowExposedRepository
 import com.dgsdddsample.infrastructure.transaction.ExposedTransactionManager
-import com.dgsdddsample.presentation.adapter.ShowAdapter
 import com.dgsdddsample.usecase.show.*
 import com.dgsdddsample.usecase.transaction.TransactionManager
 import org.koin.dsl.module
@@ -22,5 +21,4 @@ val appModule = module {
     single { GetShowUseCase(get(), get()) }
     single { ShowFactory(get(), get()) }
     single { UpdateShowUseCase(get(), get(), get()) }
-    single { ShowAdapter() }
 }

@@ -1,6 +1,6 @@
 package com.dgsdddsample.presentation.datafetcher
 
-import com.dgsdddsample.presentation.adapter.ShowAdapter
+import com.dgsdddsample.presentation.adapter.egress.show.adapt
 import com.dgsdddsample.presentation.generated.types.UpdateShowInput
 import com.dgsdddsample.presentation.generated.types.UpdateShowPayload
 import com.dgsdddsample.usecase.show.UpdateShowUseCase
@@ -13,7 +13,6 @@ import org.koin.core.component.inject
 @DgsComponent
 class UpdateShowDataFetcher : KoinComponent {
     private val updateShowUseCase: UpdateShowUseCase by inject()
-    private val showAdapter: ShowAdapter by inject()
 
     @DgsMutation
     fun updateShow(@InputArgument input: UpdateShowInput): UpdateShowPayload {
@@ -26,7 +25,7 @@ class UpdateShowDataFetcher : KoinComponent {
             )
         ).let { dto ->
             UpdateShowPayload(
-                show = dto.show?.let { showAdapter.adapt(it) },
+                show = dto.show?.adapt(),
                 error = dto.error,
             )
         }

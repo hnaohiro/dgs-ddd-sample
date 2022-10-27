@@ -1,6 +1,6 @@
 package com.dgsdddsample.presentation.datafetcher
 
-import com.dgsdddsample.presentation.adapter.ShowAdapter
+import com.dgsdddsample.presentation.adapter.egress.show.adapt
 import com.dgsdddsample.presentation.adapter.ingress.querycondition.int.adapt
 import com.dgsdddsample.presentation.adapter.ingress.querycondition.string.adapt
 import com.dgsdddsample.presentation.generated.types.IntCondition
@@ -16,7 +16,6 @@ import org.koin.core.component.inject
 @DgsComponent
 class ShowsDataFetcher : KoinComponent {
     private val getShowsUseCase: GetShowsUseCase by inject()
-    private val showAdapter: ShowAdapter by inject()
 
     @DgsQuery
     fun shows(
@@ -29,7 +28,7 @@ class ShowsDataFetcher : KoinComponent {
                 releaseYear = releaseYear?.adapt(),
             )
         ).let { dto ->
-            dto.shows.map { showAdapter.adapt(it) }
+            dto.shows.map { it.adapt() }
         }
     }
 }
