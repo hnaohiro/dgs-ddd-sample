@@ -2,6 +2,10 @@ package com.dgsdddsample.domain.show
 
 @JvmInline
 value class ShowVersion(private val value: Int) {
+    init {
+        require(value > 0)
+    }
+
     fun int() = value
 
     fun increment() = ShowVersion(value + 1)
