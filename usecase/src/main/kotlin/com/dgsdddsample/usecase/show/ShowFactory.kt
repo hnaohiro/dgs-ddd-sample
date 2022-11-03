@@ -23,7 +23,7 @@ class ShowFactory(
         )
     }
 
-    fun build(
+    fun buildWithIdAndVersion(
         id: ShowId,
         version: ShowVersion,
         title: Title,

@@ -13,7 +13,7 @@ class UpdateShowUseCase(
 
     fun handle(params: Params): DTO {
         return transactionManager.transaction {
-            val show = showFactory.build(
+            val show = showFactory.buildWithIdAndVersion(
                 id = ShowId.from(params.id),
                 version = ShowVersion(params.version),
                 title = Title(params.title),
