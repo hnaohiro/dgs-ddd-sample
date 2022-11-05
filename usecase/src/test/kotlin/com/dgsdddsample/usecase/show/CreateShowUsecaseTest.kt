@@ -26,7 +26,7 @@ class CreateShowUsecaseTest : BehaviorSpec() {
                 every { showFactory.build(any(), any()) } returns show
                 every { showRepository.save(any()) } returns true
 
-                Then("returns valid show") {
+                Then("returns DTO(show)") {
                     CreateShowUseCase
                         .Params("test", 2022)
                         .let { createShowUseCase.handle(it) }
