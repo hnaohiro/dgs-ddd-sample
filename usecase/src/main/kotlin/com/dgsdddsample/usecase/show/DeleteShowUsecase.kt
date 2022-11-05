@@ -16,7 +16,7 @@ class DeleteShowUseCase(
             if (showRepository.delete(ShowId.from(params.id))) {
                 DTO(error = null)
             } else {
-                DTO(error = "failed to save")
+                DTO(error = "failed to delete")
             }
         }
     }
