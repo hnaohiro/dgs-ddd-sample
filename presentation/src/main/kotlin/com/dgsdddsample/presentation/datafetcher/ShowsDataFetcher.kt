@@ -22,13 +22,14 @@ class ShowsDataFetcher : KoinComponent {
         @InputArgument title: StringCondition?,
         @InputArgument releaseYear: IntCondition?,
     ): List<Show> {
-        return getShowsUseCase.handle(
-            GetShowsUseCase.Params(
+        return GetShowsUseCase
+            .Params(
                 title = title?.adapt(),
                 releaseYear = releaseYear?.adapt(),
             )
-        ).let { dto ->
-            dto.shows.map { it.adapt() }
-        }
+            .let { getShowsUseCase.handle(it) }
+            .let { dto ->
+                dto.shows.map { it.adapt() }
+            }
     }
 }

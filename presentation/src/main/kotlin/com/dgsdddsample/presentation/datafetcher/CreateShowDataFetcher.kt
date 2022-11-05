@@ -16,16 +16,17 @@ class CreateShowDataFetcher : KoinComponent {
 
     @DgsMutation
     fun createShow(@InputArgument input: CreateShowInput): CreateShowPayload {
-        return createShowUseCase.handle(
-            CreateShowUseCase.Params(
+        return CreateShowUseCase
+            .Params(
                 title = input.title,
                 releaseYear = input.releaseYear,
             )
-        ).let { dto ->
-            CreateShowPayload(
-                show = dto.show?.adapt(),
-                error = dto.error,
-            )
-        }
+            .let { createShowUseCase.handle(it) }
+            .let { dto ->
+                CreateShowPayload(
+                    show = dto.show?.adapt(),
+                    error = dto.error,
+                )
+            }
     }
 }

@@ -16,12 +16,13 @@ class ShowDataFetcher : KoinComponent {
 
     @DgsQuery
     fun show(@InputArgument id: String): Show? {
-        return getShowUseCase.handle(
-            GetShowUseCase.Params(
+        return GetShowUseCase
+            .Params(
                 id = ShowId.from(id),
             )
-        ).let { dto ->
-            dto.show?.adapt()
-        }
+            .let { getShowUseCase.handle(it) }
+            .let { dto ->
+                dto.show?.adapt()
+            }
     }
 }

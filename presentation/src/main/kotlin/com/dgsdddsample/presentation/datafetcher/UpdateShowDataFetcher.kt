@@ -16,18 +16,19 @@ class UpdateShowDataFetcher : KoinComponent {
 
     @DgsMutation
     fun updateShow(@InputArgument input: UpdateShowInput): UpdateShowPayload {
-        return updateShowUseCase.handle(
-            UpdateShowUseCase.Params(
+        return UpdateShowUseCase
+            .Params(
                 id = input.id,
                 version = input.version,
                 title = input.title,
                 releaseYear = input.releaseYear,
             )
-        ).let { dto ->
-            UpdateShowPayload(
-                show = dto.show?.adapt(),
-                error = dto.error,
-            )
-        }
+            .let { updateShowUseCase.handle(it) }
+            .let { dto ->
+                UpdateShowPayload(
+                    show = dto.show?.adapt(),
+                    error = dto.error,
+                )
+            }
     }
 }

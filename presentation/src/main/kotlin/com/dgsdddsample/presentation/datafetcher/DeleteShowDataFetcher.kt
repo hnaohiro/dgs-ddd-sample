@@ -15,14 +15,15 @@ class DeleteShowDataFetcher : KoinComponent {
 
     @DgsMutation
     fun deleteShow(@InputArgument input: UpdateShowInput): DeleteShowPayload {
-        return deleteShowUseCase.handle(
-            DeleteShowUseCase.Params(
+        return DeleteShowUseCase
+            .Params(
                 id = input.id,
             )
-        ).let { dto ->
-            DeleteShowPayload(
-                error = dto.error,
-            )
-        }
+            .let { deleteShowUseCase.handle(it) }
+            .let { dto ->
+                DeleteShowPayload(
+                    error = dto.error,
+                )
+            }
     }
 }
