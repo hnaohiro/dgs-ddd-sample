@@ -1,6 +1,7 @@
 package com.dgsdddsample.usecase.show
 
 import com.dgsdddsample.domain.show.*
+import com.dgsdddsample.usecase.show.service.ShowsQueryService
 import com.dgsdddsample.usecase.transaction.NopTransactionManager
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe

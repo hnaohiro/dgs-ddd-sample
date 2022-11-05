@@ -1,6 +1,8 @@
 package com.dgsdddsample.usecase.show
 
-import com.dgsdddsample.domain.show.*
+import com.dgsdddsample.domain.show.Show
+import com.dgsdddsample.domain.show.ShowRepository
+import com.dgsdddsample.usecase.show.factory.ShowFactory
 import com.dgsdddsample.usecase.transaction.TransactionManager
 
 class UpdateShowUseCase(
@@ -14,10 +16,10 @@ class UpdateShowUseCase(
     fun handle(params: Params): DTO {
         return transactionManager.transaction {
             val show = showFactory.buildWithIdAndVersion(
-                id = ShowId.from(params.id),
-                version = ShowVersion(params.version),
-                title = Title(params.title),
-                releaseYear = ReleaseYear(params.releaseYear),
+                id = params.id,
+                version = params.version,
+                title = params.title,
+                releaseYear = params.releaseYear,
             )
 
             if (showRepository.save(show)) {

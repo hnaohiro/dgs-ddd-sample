@@ -7,7 +7,7 @@ import com.dgsdddsample.usecase.queryservice.condition.CompareType
 import com.dgsdddsample.usecase.queryservice.condition.IntQueryCondition
 import com.dgsdddsample.usecase.queryservice.condition.MatchType
 import com.dgsdddsample.usecase.queryservice.condition.StringCondition
-import com.dgsdddsample.usecase.show.ShowsQueryService
+import com.dgsdddsample.usecase.show.service.ShowsQueryService
 import org.jetbrains.exposed.sql.LikePattern
 import org.jetbrains.exposed.sql.Op
 import org.jetbrains.exposed.sql.and

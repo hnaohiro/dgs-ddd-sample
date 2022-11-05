@@ -1,4 +1,4 @@
-package com.dgsdddsample.usecase.show
+package com.dgsdddsample.usecase.show.service
 
 import com.dgsdddsample.domain.show.Show
 import com.dgsdddsample.usecase.queryservice.condition.IntQueryCondition

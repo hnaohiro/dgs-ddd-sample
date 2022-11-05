@@ -1,6 +1,7 @@
 package com.dgsdddsample.usecase.show
 
 import com.dgsdddsample.domain.show.*
+import com.dgsdddsample.usecase.show.factory.ShowFactory
 import com.dgsdddsample.usecase.transaction.NopTransactionManager
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.BehaviorSpec
@@ -22,7 +23,7 @@ class CreateShowUsecaseTest : BehaviorSpec() {
                     title = Title("test"),
                     releaseYear = ReleaseYear(2022),
                 )
-                every { showFactory.build(Title("test"), ReleaseYear(2022)) } returns show
+                every { showFactory.build(any(), any()) } returns show
                 every { showRepository.save(any()) } returns true
 
                 Then("returns valid show") {
@@ -50,10 +51,10 @@ class CreateShowUsecaseTest : BehaviorSpec() {
                     title = Title("test"),
                     releaseYear = ReleaseYear(2022),
                 )
-                every { showFactory.build(Title("test"), ReleaseYear(2022)) } returns show
+                every { showFactory.build(any(), any()) } returns show
                 every { showRepository.save(any()) } returns false
 
-                Then("returns DTO(show is null)") {
+                Then("returns DTO(error)") {
                     CreateShowUseCase
                         .Params("test", 2022)
                         .let { createShowUseCase.handle(it) }

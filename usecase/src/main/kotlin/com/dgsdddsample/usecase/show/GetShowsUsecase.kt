@@ -3,6 +3,7 @@ package com.dgsdddsample.usecase.show
 import com.dgsdddsample.domain.show.Show
 import com.dgsdddsample.usecase.queryservice.condition.IntQueryCondition
 import com.dgsdddsample.usecase.queryservice.condition.StringCondition
+import com.dgsdddsample.usecase.show.service.ShowsQueryService
 import com.dgsdddsample.usecase.transaction.TransactionManager
 
 class GetShowsUseCase(

@@ -1,4 +1,4 @@
-package com.dgsdddsample.usecase.show
+package com.dgsdddsample.usecase.show.factory
 
 import com.dgsdddsample.domain.shared.ULID
 import com.dgsdddsample.domain.shared.ULIDGenerator
@@ -24,7 +24,7 @@ class ShowFactoryTest : BehaviorSpec() {
                 every { showRepository.existBy(Title("test"), ReleaseYear(2022)) } returns false
 
                 Then("returns valid Show") {
-                    showFactory.build(Title("test"), ReleaseYear(2022)).let {
+                    showFactory.build("test", 2022).let {
                         it shouldBe Show(
                             id = ShowId(ulidGenerator.generate()),
                             version = ShowVersion.init,
@@ -40,7 +40,7 @@ class ShowFactoryTest : BehaviorSpec() {
 
                 Then("throws IllegalArgumentException") {
                     val exception = shouldThrow<IllegalArgumentException> {
-                        showFactory.build(Title("test"), ReleaseYear(2022))
+                        showFactory.build("test", 2022)
                     }
                     exception.message should startWith("title and releaseYear already exist")
                 }
@@ -59,10 +59,10 @@ class ShowFactoryTest : BehaviorSpec() {
 
                 Then("returns valid Show") {
                     showFactory.buildWithIdAndVersion(
-                        showId,
-                        ShowVersion.init,
-                        Title("test2"),
-                        ReleaseYear(2022)
+                        showId.string(),
+                        1,
+                        "test2",
+                        2022,
                     ) shouldBe Show(
                         showId,
                         ShowVersion.init.increment(),
@@ -78,7 +78,7 @@ class ShowFactoryTest : BehaviorSpec() {
 
                 Then("throws IllegalArgumentException") {
                     val exception = shouldThrow<IllegalArgumentException> {
-                        showFactory.buildWithIdAndVersion(showId, ShowVersion.init, Title("test"), ReleaseYear(2022))
+                        showFactory.buildWithIdAndVersion(showId.string(), 1, "test", 2022)
                     }
                     exception.message should startWith("not found")
                 }
@@ -95,7 +95,7 @@ class ShowFactoryTest : BehaviorSpec() {
 
                 Then("throws IllegalArgumentException") {
                     val exception = shouldThrow<IllegalArgumentException> {
-                        showFactory.buildWithIdAndVersion(showId, ShowVersion.init, Title("test"), ReleaseYear(2022))
+                        showFactory.buildWithIdAndVersion(showId.string(), 1, "test", 2022)
                     }
                     exception.message should startWith("invalid version")
                 }
