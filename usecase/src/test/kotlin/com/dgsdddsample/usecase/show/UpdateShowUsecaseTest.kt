@@ -28,7 +28,7 @@ class UpdateShowUsecaseTest : BehaviorSpec() {
                 every { showFactory.buildWithIdAndVersion(any(), any(), any(), any()) } returns show
                 every { showRepository.save(any()) } returns true
 
-                Then("returns valid show") {
+                Then("returns valid DTO(show)") {
                     UpdateShowUseCase
                         .Params(showId.string(), 1, "test", 2022)
                         .let { updateShowUseCase.handle(it) }
