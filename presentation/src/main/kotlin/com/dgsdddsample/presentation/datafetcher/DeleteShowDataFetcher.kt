@@ -1,7 +1,7 @@
 package com.dgsdddsample.presentation.datafetcher
 
+import com.dgsdddsample.presentation.generated.types.DeleteShowInput
 import com.dgsdddsample.presentation.generated.types.DeleteShowPayload
-import com.dgsdddsample.presentation.generated.types.UpdateShowInput
 import com.dgsdddsample.usecase.show.DeleteShowUseCase
 import com.netflix.graphql.dgs.DgsComponent
 import com.netflix.graphql.dgs.DgsMutation
@@ -14,7 +14,7 @@ class DeleteShowDataFetcher : KoinComponent {
     private val deleteShowUseCase: DeleteShowUseCase by inject()
 
     @DgsMutation
-    fun deleteShow(@InputArgument input: UpdateShowInput): DeleteShowPayload {
+    fun deleteShow(@InputArgument input: DeleteShowInput): DeleteShowPayload {
         return DeleteShowUseCase
             .Params(
                 id = input.id,

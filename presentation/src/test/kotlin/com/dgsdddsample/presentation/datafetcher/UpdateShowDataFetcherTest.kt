@@ -28,7 +28,7 @@ class UpdateShowDataFetcherTest : BehaviorSpec() {
             stopKoin()
         }
 
-        Given("show") {
+        Given("updateShow") {
             When("updateShowUseCase.handle returns DTO(show)") {
                 every { updateShowUseCase.handle(any()) } returns UpdateShowUseCase.DTO(
                     Show(

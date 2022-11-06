@@ -28,7 +28,7 @@ class CreateShowDataFetcherTest : BehaviorSpec() {
             stopKoin()
         }
 
-        Given("show") {
+        Given("createShow") {
             When("createShowUseCase.handle returns DTO(show)") {
                 every { createShowUseCase.handle(any()) } returns CreateShowUseCase.DTO(
                     Show(
