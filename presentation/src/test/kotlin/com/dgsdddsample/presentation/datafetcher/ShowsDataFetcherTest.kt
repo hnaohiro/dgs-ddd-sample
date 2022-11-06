@@ -7,6 +7,7 @@ import io.kotest.matchers.shouldBe
 import io.mockk.every
 import io.mockk.mockk
 import org.koin.core.context.startKoin
+import org.koin.core.context.stopKoin
 import org.koin.dsl.module
 import com.dgsdddsample.presentation.generated.types.Show as GraphQLShow
 
@@ -15,8 +16,14 @@ class ShowsDataFetcherTest : BehaviorSpec() {
     private val showsDataFetcher = ShowsDataFetcher()
 
     init {
-        startKoin {
-            modules(module { single { getShowsUseCase } })
+        beforeSpec {
+            startKoin {
+                modules(module { single { getShowsUseCase } })
+            }
+        }
+
+        afterSpec {
+            stopKoin()
         }
 
         Given("shows") {

@@ -9,6 +9,7 @@ import io.kotest.matchers.shouldBe
 import io.mockk.every
 import io.mockk.mockk
 import org.koin.core.context.startKoin
+import org.koin.core.context.stopKoin
 import org.koin.dsl.module
 import com.dgsdddsample.presentation.generated.types.Show as GraphQLShow
 
@@ -17,8 +18,14 @@ class CreateShowDataFetcherTest : BehaviorSpec() {
     private val createShowDataFetcher = CreateShowDataFetcher()
 
     init {
-        startKoin {
-            modules(module { single { createShowUseCase } })
+        beforeSpec {
+            startKoin {
+                modules(module { single { createShowUseCase } })
+            }
+        }
+
+        afterSpec {
+            stopKoin()
         }
 
         Given("show") {
@@ -32,7 +39,7 @@ class CreateShowDataFetcherTest : BehaviorSpec() {
                     )
                 )
 
-                Then("returns list(show)") {
+                Then("returns Payload(show)") {
                     val input = CreateShowInput(
                         title = "test",
                         releaseYear = 2022,
@@ -52,7 +59,7 @@ class CreateShowDataFetcherTest : BehaviorSpec() {
             When("createShowUseCase.handle returns DTO(error)") {
                 every { createShowUseCase.handle(any()) } returns CreateShowUseCase.DTO(error = "failed to save")
 
-                Then("returns empty list") {
+                Then("returns Payload(error)") {
                     val input = CreateShowInput(
                         title = "test",
                         releaseYear = 2022,
