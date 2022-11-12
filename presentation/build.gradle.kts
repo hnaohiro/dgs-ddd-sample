@@ -13,7 +13,6 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter")
     implementation(platform("com.netflix.graphql.dgs:graphql-dgs-platform-dependencies:5.3.0"))
     implementation("com.netflix.graphql.dgs:graphql-dgs-spring-boot-starter")
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
 tasks.withType<com.netflix.graphql.dgs.codegen.gradle.GenerateJavaTask> {
