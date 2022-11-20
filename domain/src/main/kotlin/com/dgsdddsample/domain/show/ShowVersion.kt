@@ -6,9 +6,13 @@ value class ShowVersion(private val value: Int) {
         require(value > 0)
     }
 
-    fun int() = value
+    fun int(): Int {
+        return value
+    }
 
-    fun increment() = ShowVersion(value + 1)
+    fun increment(): ShowVersion {
+        return ShowVersion(value + 1)
+    }
 
     companion object {
         val init = ShowVersion(1)

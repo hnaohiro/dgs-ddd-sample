@@ -1,6 +1,6 @@
 package com.dgsdddsample.usecase.queryservice.condition
 
-data class StringCondition(
+data class StringQueryCondition(
     val value: String,
     val matchType: MatchType,
 )

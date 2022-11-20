@@ -6,5 +6,5 @@ value class ULID(private val value: String) {
         require(value.length == 26) { "length should equal 26" }
     }
 
-    fun string() = value
+    fun string(): String = value
 }

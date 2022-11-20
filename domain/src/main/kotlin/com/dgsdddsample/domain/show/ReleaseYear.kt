@@ -6,5 +6,5 @@ value class ReleaseYear(private val value: Int) {
         require(value > 1900) { "value should be greater than 1900" }
     }
 
-    fun int() = value
+    fun int(): Int = value
 }

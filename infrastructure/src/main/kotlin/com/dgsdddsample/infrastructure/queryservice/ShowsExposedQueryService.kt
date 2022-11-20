@@ -6,7 +6,7 @@ import com.dgsdddsample.infrastructure.table.ShowTable
 import com.dgsdddsample.usecase.queryservice.condition.CompareType
 import com.dgsdddsample.usecase.queryservice.condition.IntQueryCondition
 import com.dgsdddsample.usecase.queryservice.condition.MatchType
-import com.dgsdddsample.usecase.queryservice.condition.StringCondition
+import com.dgsdddsample.usecase.queryservice.condition.StringQueryCondition
 import com.dgsdddsample.usecase.show.service.ShowsQueryService
 import org.jetbrains.exposed.sql.LikePattern
 import org.jetbrains.exposed.sql.Op
@@ -14,7 +14,7 @@ import org.jetbrains.exposed.sql.and
 import org.jetbrains.exposed.sql.select
 
 class ShowsExposedQueryService : ShowsQueryService {
-    override fun search(title: StringCondition?, releaseYear: IntQueryCondition?): List<Show> {
+    override fun search(title: StringQueryCondition?, releaseYear: IntQueryCondition?): List<Show> {
         return listOfNotNull(
             title?.let {
                 when (it.matchType) {

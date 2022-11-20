@@ -6,5 +6,7 @@ data class Title(private val value: String) {
         require(value.length <= 50) { "length should be less than 51" }
     }
 
-    fun string() = value
+    fun string(): String {
+        return value
+    }
 }
